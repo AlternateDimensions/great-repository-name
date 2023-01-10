@@ -14,14 +14,23 @@ public class HorseBarnRunner
         ArrayList<Horse> barnSpaces = barn.getSpaces();
         ArrayList<Horse> newOrder = new ArrayList<Horse>();
         int[] randOrder = RandomPermutation.next(barnSpaces.size());
+        
         for (int i : randOrder){
             newOrder.add(barnSpaces.get(i-1));
         }
-        for (int x = 0; x < newOrder.size(); x++){
-            String text = newOrder.get(x).getName() + " and " + newOrder.get(x+1).getName();
-            newOrder.remove(x+1);
+        System.out.println("Original: "+barnSpaces+"\n");
+        System.out.println("Shuffled: "+newOrder+"\n\nPairs:\n");
+        while(newOrder.size() > 1){
+            int random = 0;
+            while (random == 0){
+                random = (int) (Math.random()*(newOrder.size()));
+            }
+
+            String text = newOrder.remove(0).getName() + " and " + newOrder.remove((int) (Math.random()*(newOrder.size()-1))).getName();
             System.out.println(text);
+
         }
+        System.out.println(newOrder.get(0).getName() +" has no pair :(");
         
     }
 }
